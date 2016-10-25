@@ -49,7 +49,23 @@ changeChat(chat){
 	this.setState({curr_chat:chat})
 }
 addMsg(msg){
-	let current = this.state.curr_chat
+	let current = this.state.curr_chat;
+	chats=this.state.chats;
+	chats=chats.map(function(item,index){
+		if(item.name===current){
+			item.msgs.push({
+				author:"tom",
+				text:msg,
+				time:"9.50PM"
+			})
+		}
+		else{
+			return item;
+		}
+	})
+	this.setState({
+		chats:chats
+	})
 }
 	render(){
 		return(

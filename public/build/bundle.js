@@ -21513,6 +21513,21 @@
 			key: 'addMsg',
 			value: function addMsg(msg) {
 				var current = this.state.curr_chat;
+				chats = this.state.chats;
+				chats = chats.map(function (item, index) {
+					if (item.name === current) {
+						item.msgs.push({
+							author: "tom",
+							text: msg,
+							time: "9.50PM"
+						});
+					} else {
+						return item;
+					}
+				});
+				this.setState({
+					chats: chats
+				});
 			}
 		}, {
 			key: 'render',
