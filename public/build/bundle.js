@@ -21471,17 +21471,57 @@
 		function _class(props) {
 			_classCallCheck(this, _class);
 
-			return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+			_this.state = {
+				curr_chat: "sabir ameen",
+				chats: [{
+					name: "sabir ameen",
+					dp: "images/sb.jpg",
+					msgs: [{
+						author: "tom",
+						text: "hi",
+						time: "9.50PM"
+					}]
+				}, {
+					name: "Sreenath",
+					dp: "images/sb.jpg",
+					msgs: [{
+						author: "tom",
+						text: "hello",
+						time: "9.50PM"
+					}]
+				}, {
+					name: "Anoop",
+					dp: "images/sb.jpg",
+					msgs: [{
+						author: "tom",
+						text: "hey",
+						time: "9.50PM"
+					}]
+				}]
+			};
+			return _this;
 		}
 
 		_createClass(_class, [{
+			key: 'changeChat',
+			value: function changeChat(chat) {
+				this.setState({ curr_chat: chat });
+			}
+		}, {
+			key: 'addMsg',
+			value: function addMsg(msg) {
+				var current = this.state.curr_chat;
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
 					{ className: 'wrapper' },
-					_react2.default.createElement(_detailside2.default, null),
-					_react2.default.createElement(_chatside2.default, null)
+					_react2.default.createElement(_detailside2.default, { data: this.state, changeChat: this.changeChat.bind(this) }),
+					_react2.default.createElement(_chatside2.default, { data: this.state, addMsg: this.addMsg.bind(this) })
 				);
 			}
 		}]);
@@ -31769,7 +31809,7 @@
 					'div',
 					{ className: 'detail-side' },
 					_react2.default.createElement(_infohead2.default, null),
-					_react2.default.createElement(_conversations2.default, null)
+					_react2.default.createElement(_conversations2.default, { data: this.props.data, changeChat: this.props.changeChat })
 				);
 			}
 		}]);
@@ -31879,93 +31919,46 @@
 		_createClass(_class, [{
 			key: 'render',
 			value: function render() {
+				var list = this.props.data.chats;
 				return _react2.default.createElement(
 					'div',
 					{ className: 'conversations' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'convstn-wrap' },
-						_react2.default.createElement(
+					list.map(function (item, index) {
+						var _this2 = this;
+
+						return _react2.default.createElement(
 							'div',
-							{ className: 'conv-image' },
-							_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'conv-det' },
+							{ className: 'convstn-wrap', onClick: function onClick() {
+									return _this2.props.changeChat(item.name);
+								}, key: index },
 							_react2.default.createElement(
-								'strong',
-								{ className: 'chat-name' },
-								'Sabir Ameen'
+								'div',
+								{ className: 'conv-image' },
+								_react2.default.createElement('img', { className: 'prof-pic', src: item.dp })
 							),
 							_react2.default.createElement(
-								'span',
-								{ className: 'chat-time' },
-								'9.40pm'
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'chat-msg' },
-								'Hloo'
+								'div',
+								{ className: 'conv-det' },
+								_react2.default.createElement(
+									'strong',
+									{ className: 'chat-name' },
+									item.name
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'chat-time' },
+									item.msgs[item.msgs.length - 1].time
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'chat-msg' },
+									item.msgs[item.msgs.length - 1].author,
+									':',
+									item.msgs[item.msgs.length - 1].text
+								)
 							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'convstn-wrap' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'conv-image' },
-							_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'conv-det' },
-							_react2.default.createElement(
-								'strong',
-								{ className: 'chat-name' },
-								'Sabir Ameen'
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'chat-time' },
-								'9.40pm'
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'chat-msg' },
-								'Hloo'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'convstn-wrap' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'conv-image' },
-							_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'conv-det' },
-							_react2.default.createElement(
-								'strong',
-								{ className: 'chat-name' },
-								'Sabir Ameen'
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'chat-time' },
-								'9.40pm'
-							),
-							_react2.default.createElement(
-								'span',
-								{ className: 'chat-msg' },
-								'Hloo'
-							)
-						)
-					)
+						);
+					}.bind(this))
 				);
 			}
 		}]);
@@ -32030,9 +32023,9 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'chat-side' },
-					_react2.default.createElement(_chathead2.default, null),
-					_react2.default.createElement(_chats2.default, null),
-					_react2.default.createElement(_chatinput2.default, null)
+					_react2.default.createElement(_chathead2.default, { data: this.props.data }),
+					_react2.default.createElement(_chats2.default, { data: this.props.data }),
+					_react2.default.createElement(_chatinput2.default, { addMsg: this.props.addMsg })
 				);
 			}
 		}]);
@@ -32085,7 +32078,12 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'user-det' },
-					_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' })
+					_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' }),
+					_react2.default.createElement(
+						'strong',
+						{ className: 'chat-name chat-head' },
+						this.props.data.curr_chat
+					)
 				);
 			}
 		}]);
@@ -32135,7 +32133,28 @@
 		_createClass(_class, [{
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement('div', { className: 'chats' });
+				var chatData = this.props.data.chats;
+				var current = this.props.data.curr_chat;
+				var list = chatData.filter(function (item, index) {
+					return item.name === current;
+				});
+				var arr = list[0].msgs;
+				return _react2.default.createElement(
+					'div',
+					{ className: 'chats' },
+					arr.map(function (item, index) {
+						return _react2.default.createElement(
+							'span',
+							{ className: 'mdl-chip chat-data', key: index },
+							_react2.default.createElement(
+								'span',
+								{ className: 'mdl-chip__text' },
+								item.text,
+								' '
+							)
+						);
+					})
+				);
 			}
 		}]);
 
@@ -32182,9 +32201,28 @@
 		}
 
 		_createClass(_class, [{
+			key: 'enter',
+			value: function enter(ele) {
+				console.log(event);
+				if (event.keyCode == 13) {
+					this.props.addMsg(ele.value);
+					console.log("hi");
+				}
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement('div', null);
+				var _this2 = this;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'chat-input' },
+					_react2.default.createElement('img', { src: 'images/emoticon.png' }),
+					_react2.default.createElement('input', { className: 'chat-field', type: 'text', onKeyDown: function onKeyDown() {
+							return _this2.enter(_this2);
+						} }),
+					_react2.default.createElement('img', { src: 'images/mic.png' })
+				);
 			}
 		}]);
 

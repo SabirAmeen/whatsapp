@@ -9,7 +9,7 @@ export default class extends React.Component{
 		return(
 			<div className = "detail-side">
 				<InfoHead/>
-				<Conversations/>
+				<Conversations data={this.props.data} changeChat={this.props.changeChat}/>
 			</div>
 		)
 	}

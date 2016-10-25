@@ -8,9 +8,9 @@ export default class extends React.Component{
 	render(){
 		return(
 			<div className="chat-side">
-				<ChatHead/>
-				<Chats/>
-				<ChatInput/>
+				<ChatHead data={this.props.data}/>
+				<Chats data={this.props.data}/>
+				<ChatInput addMsg={this.props.addMsg}/>
 			</div>
 		)
 	}

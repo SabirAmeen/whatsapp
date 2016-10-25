@@ -78,4 +78,29 @@
 }
 .chats{
 	background-color: #E7E0DA;
+	height: 165px;
+	padding:1rem;
+	box-sizing: border-box;
+}
+.chat-data{
+	float:right;
+}
+.chat-input{
+	background-color: #EEEEEE;
+	width: 100%;
+	padding:0.6rem 1rem;
+	box-sizing: border-box;
+}
+.chat-field{
+	margin: 0 5px;
+	height:31px;
+	width:88%;
+	border-radius: 7px;
+	padding:1rem;
+	box-sizing: border-box;
+	outline: none;
+	border:none;
+}
+.chat-head{
+	margin:0 25%;
 }
