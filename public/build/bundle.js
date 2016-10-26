@@ -21475,6 +21475,7 @@
 
 			_this.state = {
 				curr_chat: "sabir ameen",
+				curr_dp: "images/sb.jpg",
 				chats: [{
 					name: "sabir ameen",
 					dp: "images/sb.jpg",
@@ -21485,7 +21486,7 @@
 					}]
 				}, {
 					name: "Sreenath",
-					dp: "images/sb.jpg",
+					dp: "images/lori.jpg",
 					msgs: [{
 						author: "tom",
 						text: "hello",
@@ -21499,6 +21500,14 @@
 						text: "hey",
 						time: "9.50PM"
 					}]
+				}, {
+					name: "finidi",
+					dp: "images/sb.jpg",
+					msgs: [{
+						author: "tom",
+						text: "hey",
+						time: "9.50PM"
+					}]
 				}]
 			};
 			return _this;
@@ -21506,14 +21515,16 @@
 
 		_createClass(_class, [{
 			key: 'changeChat',
-			value: function changeChat(chat) {
+			value: function changeChat(chat, dp) {
 				this.setState({ curr_chat: chat });
+				console.log(dp);
+				this.setState({ curr_dp: dp });
 			}
 		}, {
 			key: 'addMsg',
 			value: function addMsg(msg) {
 				var current = this.state.curr_chat;
-				chats = this.state.chats;
+				var chats = this.state.chats;
 				chats = chats.map(function (item, index) {
 					if (item.name === current) {
 						item.msgs.push({
@@ -21521,6 +21532,7 @@
 							text: msg,
 							time: "9.50PM"
 						});
+						return item;
 					} else {
 						return item;
 					}
@@ -31944,7 +31956,7 @@
 						return _react2.default.createElement(
 							'div',
 							{ className: 'convstn-wrap', onClick: function onClick() {
-									return _this2.props.changeChat(item.name);
+									return _this2.props.changeChat(item.name, item.dp);
 								}, key: index },
 							_react2.default.createElement(
 								'div',
@@ -32093,7 +32105,7 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'user-det' },
-					_react2.default.createElement('img', { className: 'prof-pic', src: 'images/sb.jpg' }),
+					_react2.default.createElement('img', { className: 'prof-pic', src: this.props.data.curr_dp }),
 					_react2.default.createElement(
 						'strong',
 						{ className: 'chat-name chat-head' },
@@ -32160,10 +32172,10 @@
 					arr.map(function (item, index) {
 						return _react2.default.createElement(
 							'span',
-							{ className: 'mdl-chip chat-data', key: index },
+							{ className: 'chat-data', key: index },
 							_react2.default.createElement(
 								'span',
-								{ className: 'mdl-chip__text' },
+								{ className: 'mdl-chip__text .msg' },
 								item.text,
 								' '
 							)
@@ -32198,6 +32210,10 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _reactNativeListener = __webpack_require__(181);
+
+	var _reactNativeListener2 = _interopRequireDefault(_reactNativeListener);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32209,19 +32225,22 @@
 	var _class = function (_React$Component) {
 		_inherits(_class, _React$Component);
 
-		function _class() {
+		function _class(props) {
 			_classCallCheck(this, _class);
 
-			return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+			_this.node = undefined;
+			return _this;
 		}
 
 		_createClass(_class, [{
 			key: 'enter',
-			value: function enter(ele) {
-				console.log(event);
+			value: function enter() {
+				console.log(event.keyCode);
 				if (event.keyCode == 13) {
-					this.props.addMsg(ele.value);
-					console.log("hi");
+					this.props.addMsg(this.node.value);
+					this.node.value = "";
 				}
 			}
 		}, {
@@ -32233,9 +32252,13 @@
 					'div',
 					{ className: 'chat-input' },
 					_react2.default.createElement('img', { src: 'images/emoticon.png' }),
-					_react2.default.createElement('input', { className: 'chat-field', type: 'text', onKeyDown: function onKeyDown() {
-							return _this2.enter(_this2);
-						} }),
+					_react2.default.createElement(
+						_reactNativeListener2.default,
+						{ onKeyDown: this.enter.bind(this) },
+						_react2.default.createElement('input', { className: 'chat-field', type: 'text', ref: function ref(node) {
+								return _this2.node = node;
+							} })
+					),
 					_react2.default.createElement('img', { src: 'images/mic.png' })
 				);
 			}
@@ -32245,6 +32268,117 @@
 	}(_react2.default.Component);
 
 	exports.default = _class;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _NativeListener = __webpack_require__(182);
+
+	var _NativeListener2 = _interopRequireDefault(_NativeListener);
+
+	exports['default'] = _NativeListener2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var events = ['KeyDown', 'KeyPress', 'KeyUp', 'Click', 'ContextMenu', 'DoubleClick', 'Drag', 'DragEnd', 'DragEnter', 'DragExit', 'DragLeave', 'DragOver', 'DragStart', 'Drop', 'MouseDown', 'MouseEnter', 'MouseLeave', 'MouseMove', 'MouseOut', 'MouseOver', 'MouseUp'];
+
+	var aliases = {
+	  'DoubleClick': 'dblclick'
+	};
+
+	var toEventName = function toEventName(event) {
+	  return (aliases[event] || event).toLowerCase();
+	};
+
+	var NativeListener = (function (_Component) {
+	  _inherits(NativeListener, _Component);
+
+	  function NativeListener() {
+	    _classCallCheck(this, NativeListener);
+
+	    _Component.apply(this, arguments);
+	  }
+
+	  NativeListener.prototype.componentDidMount = function componentDidMount() {
+	    var props = this.props;
+	    var element = _reactDom2['default'].findDOMNode(this);
+	    events.forEach(function (event) {
+	      var capture = props['on' + event + 'Capture'];
+	      var bubble = props['on' + event];
+	      var stop = props['stop' + event];
+	      if (capture && typeof capture === 'function') {
+	        element.addEventListener(toEventName(event), capture, true);
+	      }
+	      if (bubble && typeof bubble === 'function') {
+	        element.addEventListener(toEventName(event), bubble, false);
+	      }
+	      if (stop === true) {
+	        element.addEventListener(toEventName(event), function (nativeEvent) {
+	          return nativeEvent.stopPropagation();
+	        }, false);
+	      }
+	    });
+	  };
+
+	  NativeListener.prototype.render = function render() {
+	    return this.props.children;
+	  };
+
+	  _createClass(NativeListener, null, [{
+	    key: 'displayName',
+	    value: 'NativeListener',
+	    enumerable: true
+	  }, {
+	    key: 'propTypes',
+	    value: _extends({
+	      children: function children(props, propName) {
+	        if (props[propName].length) {
+	          return new Error('NativeListener can only wrap one element');
+	        }
+	      }
+	    }, events.reduce(function (accumulator, event) {
+	      var _extends2;
+
+	      return _extends({}, accumulator, (_extends2 = {}, _extends2['on' + event] = _react.PropTypes.func, _extends2['on' + event + 'Capture'] = _react.PropTypes.func, _extends2['stop' + event] = _react.PropTypes.bool, _extends2));
+	    }, {})),
+	    enumerable: true
+	  }]);
+
+	  return NativeListener;
+	})(_react.Component);
+
+	exports['default'] = NativeListener;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

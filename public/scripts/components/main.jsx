@@ -8,6 +8,7 @@ export default class extends React.Component{
 		super(props);
 		this.state = {
 			curr_chat:"sabir ameen",
+			curr_dp:"images/sb.jpg",
 			chats:[
 				{
 					name:"sabir ameen",
@@ -22,7 +23,7 @@ export default class extends React.Component{
 				},
 				{
 					name:"Sreenath",
-					dp:"images/sb.jpg",
+					dp:"images/lori.jpg",
 					msgs:[
 						{
 							author:"tom",
@@ -41,16 +42,30 @@ export default class extends React.Component{
 							time:"9.50PM"
 						}
 					]
+				},
+				{
+					name:"finidi",
+					dp:"images/sb.jpg",
+					msgs:[
+						{
+							author:"tom",
+							text:"hey",
+							time:"9.50PM"
+						}
+					]
 				}
 			]
 		}
 	}
-changeChat(chat){
+changeChat(chat,dp){
 	this.setState({curr_chat:chat})
+	console.log(dp)
+	this.setState({curr_dp:dp})
+
 }
 addMsg(msg){
 	let current = this.state.curr_chat;
-	chats=this.state.chats;
+	let chats=this.state.chats;
 	chats=chats.map(function(item,index){
 		if(item.name===current){
 			item.msgs.push({
@@ -58,6 +73,7 @@ addMsg(msg){
 				text:msg,
 				time:"9.50PM"
 			})
+			return item;
 		}
 		else{
 			return item;

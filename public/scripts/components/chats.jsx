@@ -16,8 +16,8 @@ export default class extends React.Component{
 				{
 					arr.map(function(item,index){
 						return(
-							<span className="mdl-chip chat-data" key={index}>
-    							<span className="mdl-chip__text">{item.text} </span>
+							<span className="chat-data" key={index}>
+    							<span className="mdl-chip__text .msg">{item.text} </span>
 							</span>
 							)
 					})

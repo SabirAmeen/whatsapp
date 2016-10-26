@@ -40,6 +40,10 @@
 	padding-left: 3rem;
 	outline: none;
 }
+.conversations{
+	overflow-y: auto;
+	height:174px;
+}
 .convstn-wrap{
 	width:100%;
 	height:50px;
@@ -81,9 +85,23 @@
 	height: 165px;
 	padding:1rem;
 	box-sizing: border-box;
+	overflow-y: auto;
 }
 .chat-data{
+	height: 32px;
 	float:right;
+	clear:both;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    line-height: 32px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 16px;
+    background-color: #dedede;
+    color: rgba(0,0,0,.87);
+    margin: 2px 0;
+    font-size: 0;
+    white-space: nowrap;
+	display: block;
 }
 .chat-input{
 	background-color: #EEEEEE;

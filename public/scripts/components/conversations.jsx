@@ -9,7 +9,7 @@ export default class extends React.Component{
 				{
 					list.map(function(item,index){
 						return(
-							<div className="convstn-wrap"  onClick={()=>this.props.changeChat(item.name)} key={index}>
+							<div className="convstn-wrap"  onClick={()=>this.props.changeChat(item.name,item.dp)} key={index}>
 								<div className="conv-image">
 									<img className="prof-pic" src={item.dp}/>
 								</div>
